@@ -8,8 +8,7 @@ import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import {
   ErrorComponent,
   notificationProvider,
-  RefineSnackbarProvider,
-  ThemedLayoutV2,
+  RefineSnackbarProvider
 } from "@refinedev/mui";
 
 import CssBaseline from "@mui/material/CssBaseline";
@@ -40,6 +39,18 @@ import {
 } from "./pages/categories";
 import { Login } from "./pages/login";
 import { parseJwt } from "./utils/parse-jwt";
+
+// import {Sider} from './components/sider'
+// import {Title} from './components/title'
+
+import { ReactComponent as Logo } from './assets/logo.svg'
+import { ReactComponent as PropertyBoard } from './assets/PropertyBoard.svg'
+
+import { ThemedLayoutV2 } from "./components/layout/index";
+// import { Header } from "./components/layout/header";
+import { ThemedSiderV2 } from "./components/layout/sider";
+import { ThemedTitleV2 } from "./components/layout/title";
+
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((config) => {
@@ -163,6 +174,10 @@ function App() {
                   },
                 ]}
                 options={{
+                  title: {
+                    icon: <Logo />,
+                    text: <PropertyBoard />,
+                  },
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
                   useNewQueryKeys: true,
@@ -176,7 +191,20 @@ function App() {
                         key="authenticated-inner"
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                        <ThemedLayoutV2 Header={Header}>
+                        <ThemedLayoutV2 
+
+                        Header={Header}
+                        Sider={ThemedSiderV2}
+                        Title={ThemedTitleV2}
+
+
+
+                        // Title={({ collapsed }) => <Title collapsed={collapsed} />}
+                        // Sider={() => ( <Sider /> )}
+                        // Header={Header}
+                        
+                        
+                        >
                           <Outlet />
                         </ThemedLayoutV2>
                       </Authenticated>
