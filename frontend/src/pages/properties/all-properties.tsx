@@ -1,9 +1,37 @@
+import { Add } from '@mui/icons-material'
 import React from 'react'
+import { useList } from '@refinedev/core'
+import { Box, Stack, Typography } from '@mui/material'
 
-const allProperties = () => {
+import { useNavigate } from 'react-router-dom';
+
+import { PropertyCard, CustomButton } from '../../components'
+
+const AllProperties = () => {
+  const navigate = useNavigate()
+
+
   return (
-    <div>all-properties</div>
+    <Box>
+      <Stack
+      alignItems={"center"}
+      direction={'row'} justifyContent={'space-between'}>
+        <Typography
+        fontSize={25} fontWeight={700} color={'#11142D'}
+        >
+All Properties
+        </Typography>
+
+        <CustomButton title="Add Property"
+        handleClick={()=> navigate('/properties/create')}
+        backgroundColor="#475be8"
+        color="#fcfcfc"
+        icon={<Add />}
+        />
+
+      </Stack>
+    </Box>
   )
 }
 
-export default allProperties
+export default AllProperties
