@@ -21,24 +21,31 @@ import routerBindings, {
 } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
 import axios from "axios";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { CredentialResponse } from "./interfaces/google";
+
 import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
-import { Login } from "./pages/login";
+  Login,
+  Home,
+  Agents,
+  MyProfile,
+  PropertyDetails,
+  AllProperties,
+  CreateProperty,
+  AgentProfile,
+  EditProperty,
+} from "./pages";
+
 import { parseJwt } from "./utils/parse-jwt";
+
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AccountCircleOutlined from "@mui/icons-material/AccountCircleOutlined";
+import ChatBubbleOutline from "@mui/icons-material/ChatBubbleOutline";
+import PeopleAltOutlined from "@mui/icons-material/PeopleAltOutlined";
+import StarOutlineRounded from "@mui/icons-material/StarOutlineRounded";
+import VillaOutlined from "@mui/icons-material/VillaOutlined";
 
 // import {Sider} from './components/sider'
 // import {Title} from './components/title'
@@ -146,106 +153,123 @@ function App() {
           <CssBaseline />
           <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
           <RefineSnackbarProvider>
-              <Refine
-                dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
-                notificationProvider={notificationProvider}
-                routerProvider={routerBindings}
-                authProvider={authProvider}
-                resources={[
-                  {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                  {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                ]}
-                options={{
-                  title: {
-                    icon: <Logo />,
-                    text: <PropertyBoard />,
-                  },
-                  syncWithLocation: true,
-                  warnWhenUnsavedChanges: true,
-                  useNewQueryKeys: true,
-                  projectId: "3Vlwr7-kGn5Kb-fzcOSQ",
-                }}
-              >
-                <Routes>
-                  <Route
-                    element={
-                      <Authenticated
-                        key="authenticated-inner"
-                        fallback={<CatchAllNavigate to="/login" />}
-                      >
-                        <ThemedLayoutV2 
+            <Refine
+              dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+              notificationProvider={notificationProvider}
+              routerProvider={routerBindings}
+              authProvider={authProvider}
+              resources={[
+                {
+                  name: "dashboard",
+                  options: { label: "Dashboard" },
+                  list: Home,
+                  icon: <DashboardIcon />
+                },
+                {
+                  name: "properties",
+                  list: AllProperties,
+                  show: PropertyDetails,
+                  create: CreateProperty,
+                  edit: EditProperty,
 
+                  icon: <VillaOutlined />,
+                  meta: {
+                    canDelete: true,
+                  },
+                },
+                {
+                  name: "agents",
+                  list: Agents,
+                  show: AgentProfile,
+                  icon: <PeopleAltOutlined />,
+                  meta: {
+                    canDelete: true,
+                  },
+                },
+                {
+                  name: "reviews",
+                  list: Home,
+                  icon: <StarOutlineRounded />,
+                  meta: {
+                    canDelete: true,
+                  },
+                },
+                {
+                  name: "messages",
+                  list: Home,
+                  icon: <ChatBubbleOutline />,
+                  meta: {
+                    canDelete: true,
+                  },
+                },
+                {
+                  name: "my-profile",
+                  options: { label: "My Profile " },
+                  list: MyProfile,
+                  icon: <AccountCircleOutlined />,
+                  meta: {
+                    canDelete: true,
+                  },
+                },
+              ]}
+              options={{
+                title: {
+                  icon: <Logo />,
+                  text: <PropertyBoard />,
+                },
+                syncWithLocation: true,
+                warnWhenUnsavedChanges: true,
+                useNewQueryKeys: true,
+                projectId: "3Vlwr7-kGn5Kb-fzcOSQ",
+              }}
+            >
+              <Routes>
+                <Route
+                  element={
+                    <Authenticated
+                      key="authenticated-inner"
+                      fallback={<CatchAllNavigate to="/login" />}
+                    >
+                      <ThemedLayoutV2
                         Header={Header}
                         Sider={ThemedSiderV2}
                         Title={ThemedTitleV2}
-
-
-
-                        // Title={({ collapsed }) => <Title collapsed={collapsed} />}
-                        // Sider={() => ( <Sider /> )}
-                        // Header={Header}
-                        
-                        
-                        >
-                          <Outlet />
-                        </ThemedLayoutV2>
-                      </Authenticated>
-                    }
-                  >
-                    <Route
-                      index
-                      element={<NavigateToResource resource="blog_posts" />}
-                    />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
-                    </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
-                    </Route>
-                    <Route path="*" element={<ErrorComponent />} />
-                  </Route>
-                  <Route
-                    element={
-                      <Authenticated
-                        key="authenticated-outer"
-                        fallback={<Outlet />}
                       >
-                        <NavigateToResource />
-                      </Authenticated>
-                    }
-                  >
-                    <Route path="/login" element={<Login />} />
-                  </Route>
-                </Routes>
+                        <Outlet />
+                      </ThemedLayoutV2>
+                    </Authenticated>
+                  }
+                >
 
-                <RefineKbar />
-                <UnsavedChangesNotifier />
-                <DocumentTitleHandler />
-              </Refine>
+                  <Route
+                    index
+                    element={<NavigateToResource resource="dashboard" />}
+                  />
+
+                  <Route path='/dashboard'>
+                    <Route index element={<Home />} />
+                  </Route>
+
+                  <Route path="*" element={<ErrorComponent />} />
+                </Route>
+                <Route
+                  element={
+                    <Authenticated
+                      key="authenticated-outer"
+                      fallback={<Outlet />}
+                    >
+                      <NavigateToResource />
+                    </Authenticated>
+                  }
+                >
+                  <Route path="/login" element={<Login />} />
+                </Route>
+              </Routes>
+
+              <RefineKbar />
+              <UnsavedChangesNotifier />
+              <DocumentTitleHandler />
+            </Refine>
           </RefineSnackbarProvider>
         </ColorModeContextProvider>
       </RefineKbarProvider>
