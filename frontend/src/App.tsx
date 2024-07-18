@@ -21,7 +21,7 @@ import routerBindings, {
 } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
 import axios from "axios";
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { CredentialResponse } from "./interfaces/google";
@@ -47,14 +47,10 @@ import PeopleAltOutlined from "@mui/icons-material/PeopleAltOutlined";
 import StarOutlineRounded from "@mui/icons-material/StarOutlineRounded";
 import VillaOutlined from "@mui/icons-material/VillaOutlined";
 
-// import {Sider} from './components/sider'
-// import {Title} from './components/title'
-
 import { ReactComponent as Logo } from './assets/logo.svg'
 import { ReactComponent as PropertyBoard } from './assets/PropertyBoard.svg'
 
 import { ThemedLayoutV2 } from "./components/layout/index";
-// import { Header } from "./components/layout/header";
 import { ThemedSiderV2 } from "./components/layout/sider";
 import { ThemedTitleV2 } from "./components/layout/title";
 
@@ -171,7 +167,6 @@ function App() {
                   show: PropertyDetails,
                   create: CreateProperty,
                   edit: EditProperty,
-
                   icon: <VillaOutlined />,
                   meta: {
                     canDelete: true,
