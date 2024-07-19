@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { createTheme } from "@mui/material/styles";
 
 type ColorModeContextType = {
   mode: string;
@@ -15,6 +16,17 @@ type ColorModeContextType = {
 export const ColorModeContext = createContext<ColorModeContextType>(
   {} as ColorModeContextType
 );
+
+// custom theme
+const lightTheme = createTheme({
+  ...RefineThemes.Blue,
+  palette: {
+    ...RefineThemes.Blue.palette,
+    background: {
+      default: "#f0f0f0",
+    },
+  },
+});
 
 export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
   children,
@@ -49,8 +61,7 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
       }}
     >
       <ThemeProvider
-        // you can change the theme colors here. example: mode === "light" ? RefineThemes.Magenta : RefineThemes.MagentaDark
-        theme={mode === "light" ? RefineThemes.Blue : RefineThemes.BlueDark}
+        theme={mode === "light" ? lightTheme : RefineThemes.BlueDark}
       >
         {children}
       </ThemeProvider>
