@@ -5,6 +5,7 @@ import { Box, Stack, Typography, TextField, Select, MenuItem } from '@mui/materi
 import { useNavigate } from 'react-router-dom';
 
 import { PropertyCard, CustomButton } from '../../components'
+import { useMemo } from 'react';
 
 const AllProperties = () => {
   const navigate = useNavigate()
@@ -20,9 +21,39 @@ const AllProperties = () => {
     setSorter,
     filters,
     setFilters,
-  } = useTable()
+  } = useTable({
+    sorters: {
+      initial: [
+        {
+          field: "createdAt",
+          order: "desc",
+        },
+      ],
+    },
+  })
 
   const allProperties = data?.data ?? [];
+
+  const currentPrice = sorter.find((item) => item.field === "price")?.order;
+
+    const toggleSort = (field: string) => {
+        setSorter([{ field, order: currentPrice === "asc" ? "desc" : "asc" }]);
+    };
+
+    const currentFilterValues = useMemo(() => {
+        const logicalFilters = filters.flatMap((item) =>
+            "field" in item ? item : [],
+        );
+
+        return {
+            title:
+                logicalFilters.find((item) => item.field === "title")?.value ||
+                "",
+            propertyType:
+                logicalFilters.find((item) => item.field === "propertyType")
+                    ?.value || "",
+        };
+    }, [filters]);
 
   if (isLoading) return <Typography>Loading...</Typography>;
   if (isError) return <Typography>Error...</Typography>;
@@ -52,9 +83,8 @@ const AllProperties = () => {
               mb={{ xs: "20px", sm: 0 }}
             >
               <CustomButton
-                title={'dummy'}
-                // title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"}`}
-                // handleClick={() => toggleSort("price")}
+                title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"}`}
+                handleClick={() => toggleSort("price")}
                 backgroundColor="#475be8"
                 color="#fcfcfc"
               />
@@ -63,7 +93,7 @@ const AllProperties = () => {
                 variant="outlined"
                 color="info"
                 placeholder="Search by title"
-                // value={currentFilterValues.title}
+                value={currentFilterValues.title}
                 onChange={(e) => {
                   setFilters([
                     {
@@ -84,7 +114,7 @@ const AllProperties = () => {
                 required
                 inputProps={{ "aria-label": "Without label" }}
                 defaultValue=""
-                // value={currentFilterValues.propertyType}
+                value={currentFilterValues.propertyType}
                 onChange={(e) => {
                   setFilters(
                     [
