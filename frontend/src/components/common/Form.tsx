@@ -189,7 +189,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImage
               </Typography>
 
               <Button 
-              component={'lable'}
+              component={'label'}
               sx={{
                 width: 'fit-content',
                 color:'#2ed480',
@@ -203,6 +203,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImage
                 accept='image/*'
                 type='file'
                 onChange={(e)=>{
+                  // @ts-ignore
                   handleImageChange(e.target.files[0])
                 }}
                 />
