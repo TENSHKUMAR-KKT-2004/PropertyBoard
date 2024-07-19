@@ -6,11 +6,16 @@ import { useNavigate } from 'react-router-dom'
 
 import Form from '../../components/common/Form'
 
+type IUser = {
+  id: number;
+  name: string;
+  avatar: string;
+  email:string
+};
+
 const CreateProperty = () => {
   const navigate = useNavigate()
-  const {data: user} = useGetIdentity({
-    v3LegacyAuthProviderCompatible: true,
-})
+  const {data: user} = useGetIdentity<IUser>()
 const [propertyImage, setPropertyImage] = useState({ name: "", url: "" })
   const { refineCore: { onFinish, formLoading}, register,handleSubmit } = useForm()
 
@@ -29,11 +34,10 @@ const [propertyImage, setPropertyImage] = useState({ name: "", url: "" })
 
   const onFinishHandler = async (data: FieldValues)=>{
     if (!propertyImage.name) return alert("Please select an image");
-
     await onFinish({
         ...data,
         photo: propertyImage.url,
-        email: user.email,
+        email: user?.email,
     });
   }
 

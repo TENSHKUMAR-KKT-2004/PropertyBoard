@@ -71,11 +71,26 @@ function App() {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
+        const response = await fetch(
+          "http://localhost:8080/api/users",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: profileObj.name,
+              email: profileObj.email,
+              avatar: profileObj.picture,
+            }),
+          },
+        );
+        const data = await response.json();
+        console.log(data._id)
         localStorage.setItem(
           "user",
           JSON.stringify({
             ...profileObj,
             avatar: profileObj.picture,
+            userid: data._id
           })
         );
 
@@ -150,7 +165,7 @@ function App() {
           <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
           <RefineSnackbarProvider>
             <Refine
-              dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+              dataProvider={dataProvider("http://localhost:8080/api")}
               notificationProvider={notificationProvider}
               routerProvider={routerBindings}
               authProvider={authProvider}
@@ -246,11 +261,11 @@ function App() {
                   </Route>
 
                   <Route path="/properties">
-                      <Route index element={<AllProperties />} />
-                      <Route path="create" element={<CreateProperty />} />
-                      <Route path="edit/:id" element={<EditProperty />} />
-                      <Route path="show/:id" element={<PropertyDetails />} />
-                    </Route>
+                    <Route index element={<AllProperties />} />
+                    <Route path="create" element={<CreateProperty />} />
+                    <Route path="edit/:id" element={<EditProperty />} />
+                    <Route path="show/:id" element={<PropertyDetails />} />
+                  </Route>
 
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

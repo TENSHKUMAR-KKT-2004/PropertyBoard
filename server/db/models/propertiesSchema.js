@@ -1,4 +1,4 @@
-const mongoose = rquire('mongoose')
+const mongoose = require('mongoose')
 
 const PropertySchema = mongoose.Schema({
     title: {
@@ -32,4 +32,4 @@ const PropertySchema = mongoose.Schema({
 
 const propertyModel = mongoose.model('Property',PropertySchema)
 
-module.exports = {propertyModel}
+module.exports = propertyModel
