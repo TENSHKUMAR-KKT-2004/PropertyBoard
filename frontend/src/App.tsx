@@ -267,6 +267,12 @@ function App() {
                     <Route path="edit/:id" element={<EditProperty />} />
                   </Route>
 
+                  <Route path="/agents">
+                    <Route index element={<Agents />} />
+                    <Route path="show/:id" element={<PropertyDetails />} />
+                    {/* <Route path="edit/:id" element={<EditProperty />} /> */}
+                  </Route>
+
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route
