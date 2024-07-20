@@ -264,6 +264,7 @@ function App() {
                     <Route index element={<AllProperties />} />
                     <Route path="create" element={<CreateProperty />} />
                     <Route path="show/:id" element={<PropertyDetails />} />
+                    <Route path="edit/:id" element={<EditProperty />} />
                   </Route>
 
                   <Route path="*" element={<ErrorComponent />} />
