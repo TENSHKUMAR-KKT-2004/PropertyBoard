@@ -84,7 +84,7 @@ function App() {
           },
         );
         const data = await response.json();
-        console.log(data._id)
+        
         localStorage.setItem(
           "user",
           JSON.stringify({
@@ -269,8 +269,11 @@ function App() {
 
                   <Route path="/agents">
                     <Route index element={<Agents />} />
-                    <Route path="show/:id" element={<PropertyDetails />} />
-                    {/* <Route path="edit/:id" element={<EditProperty />} /> */}
+                    <Route path="show/:id" element={<AgentProfile />} />
+                  </Route>
+
+                  <Route path="/my-profile">
+                    <Route index element={<MyProfile />} />
                   </Route>
 
                   <Route path="*" element={<ErrorComponent />} />

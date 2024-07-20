@@ -12,9 +12,8 @@ const getAllusers = async(req,res)=>{
 
 const createUser = async(req,res)=>{
     try {
-        const { name, email, avatar } = req.body 
-        console.log(name, email,avatar)
-
+        const { name, email, avatar } = req.body
+        
         const userExists = await User.findOne({ email }) 
 
         if (userExists) {
@@ -35,7 +34,7 @@ const createUser = async(req,res)=>{
 
 const getUserById = async(req,res)=>{
     try {
-        const { id } = req.params 
+        const { id } = req.params
 
         const user = await User.findOne({ _id: id }).populate("allProperties") 
 

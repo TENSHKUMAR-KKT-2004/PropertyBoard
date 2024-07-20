@@ -1,9 +1,35 @@
-import React from 'react'
+import { useActiveAuthProvider, useGetIdentity, useOne } from "@refinedev/core";
 
-const myProfile = () => {
-  return (
-    <div>my-profile</div>
-  )
-}
+import { Profile } from "../components";
 
-export default myProfile
+const MyProfile = () => {
+  const authProvider = useActiveAuthProvider();
+  const { data: user } = useGetIdentity({
+    v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
+  });
+    const { data, isLoading, isError } = useOne({
+        resource: "users",
+        id: user.userid,
+    });
+
+    const myProfile = data?.data ?? [];
+
+    if (isLoading) return <div>loading...</div>;
+    if (isError) return <div>error...</div>;
+
+    return (
+        <Profile
+            type="My"
+            // @ts-ignore
+            name={myProfile.name}
+            // @ts-ignore
+            email={myProfile.email}
+            // @ts-ignore
+            avatar={myProfile.avatar}
+            // @ts-ignore
+            properties={myProfile.allProperties}
+        />
+    );
+};
+
+export default MyProfile;
