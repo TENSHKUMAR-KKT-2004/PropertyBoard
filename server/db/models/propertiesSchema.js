@@ -25,7 +25,7 @@ const PropertySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    creater: {
+    creator: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
 })
