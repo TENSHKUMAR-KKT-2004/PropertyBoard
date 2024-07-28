@@ -14,6 +14,10 @@ export interface ProfileProps {
     name: string;
     avatar: string;
     email: string;
+    banner: string;
+    role: string;
+    address: string;
+    phonenumber: string;
     properties: Array | undefined;
 }
 
@@ -40,4 +44,21 @@ export interface FormProps {
     handleImageChange: (file) => void;
     onFinishHandler: (data: FieldValues) => Promise<void> | void;
     propertyImage: { name: string; url: string };
+}
+
+export interface ProfileEditFormProps {
+    type: string;
+    register: any;
+    onFinish: (
+        values: FieldValues,
+    ) => Promise<
+        void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>
+    >;
+    formLoading: boolean;
+    handleSubmit: FormEventHandler<HTMLFormElement> | undefined;
+    handleBannerImageChange: (file) => void;
+    handleAvatarImageChange: (file) => void;
+    onFinishHandler: (data: FieldValues) => Promise<void> | void;
+    bannerImage: { name: string; url: string };
+    avatarImage: { name: string; url: string };
 }

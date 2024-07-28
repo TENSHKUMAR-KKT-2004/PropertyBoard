@@ -30,6 +30,8 @@ const AgentCard = ({
     name,
     email,
     avatar,
+    address,
+    phonenumber,
     noOfProperties,
 }: AgentCardProp) => {
   const authProvider = useActiveAuthProvider();
@@ -101,11 +103,11 @@ const AgentCard = ({
                     />
                     <InfoBar
                         icon={<Place sx={{ color: "#808191" }} />}
-                        name="London"
+                        name={address}
                     />
                     <InfoBar
                         icon={<Phone sx={{ color: "#808191" }} />}
-                        name="+502-3231-4141"
+                        name={phonenumber}
                     />
                     <InfoBar
                         icon={<LocationCity sx={{ color: "#808191" }} />}

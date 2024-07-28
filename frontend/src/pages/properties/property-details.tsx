@@ -158,14 +158,14 @@ const PropertyDetails = () => {
                                         fontWeight={700}
                                         color="#475BE8"
                                     >
-                                        ${propertyDetails.price}
+                                        ₹{propertyDetails.price}
                                     </Typography>
                                     <Typography
                                         fontSize={14}
                                         color="#808191"
                                         mb={0.5}
                                     >
-                                        for one day
+                                        only
                                     </Typography>
                                 </Stack>
                             </Box>
@@ -250,7 +250,7 @@ const PropertyDetails = () => {
                                     fontWeight={400}
                                     color="#808191"
                                 >
-                                    North Carolina, USA
+                                    {propertyDetails.creator.address}
                                 </Typography>
                             </Stack>
 

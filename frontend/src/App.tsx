@@ -36,6 +36,7 @@ import {
   CreateProperty,
   AgentProfile,
   EditProperty,
+  EditProfile
 } from "./pages";
 
 import { parseJwt } from "./utils/parse-jwt";
@@ -71,6 +72,7 @@ function App() {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
+        const storedRole = localStorage.getItem('userRole');
         const response = await fetch(
           "http://localhost:8080/api/users",
           {
@@ -80,6 +82,7 @@ function App() {
               name: profileObj.name,
               email: profileObj.email,
               avatar: profileObj.picture,
+              role: storedRole
             }),
           },
         );
@@ -216,6 +219,7 @@ function App() {
                   name: "my-profile",
                   options: { label: "My Profile " },
                   list: MyProfile,
+                  edit: EditProfile,
                   icon: <AccountCircleOutlined />,
                   meta: {
                     canDelete: true,
@@ -274,6 +278,8 @@ function App() {
 
                   <Route path="/my-profile">
                     <Route index element={<MyProfile />} />
+                  <Route path="edit/:id" element={<EditProfile />} />
+
                   </Route>
 
                   <Route path="*" element={<ErrorComponent />} />
@@ -289,6 +295,7 @@ function App() {
                   }
                 >
                   <Route path="/login" element={<Login />} />
+
                 </Route>
               </Routes>
 

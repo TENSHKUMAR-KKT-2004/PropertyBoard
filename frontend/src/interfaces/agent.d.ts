@@ -5,6 +5,8 @@ export interface AgentCardProp {
     name: string;
     email: string;
     avatar: string;
+    address: string;
+    phonenumber: string;
     noOfProperties: number;
 }
 

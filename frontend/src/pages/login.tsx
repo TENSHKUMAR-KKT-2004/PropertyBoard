@@ -1,5 +1,5 @@
 import { useLogin } from "@refinedev/core";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import logo from '../assets/logo.svg'
 import PropertyBoard from '../assets/PropertyBoard.svg'
@@ -9,6 +9,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import { CredentialResponse } from "../interfaces/google"
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 export const Login: React.FC = () => {
   const { mutate: login } = useLogin<CredentialResponse>();
@@ -44,6 +45,21 @@ export const Login: React.FC = () => {
     return <div ref={divRef} />;
   };
 
+  const [selectedRole, setSelectedRole] = useState('');
+
+    useEffect(() => {
+        const storedRole = localStorage.getItem('userRole');
+        if (storedRole) {
+            setSelectedRole(storedRole);
+        }
+    }, []);
+
+    const handleChange = (event: { target: { value: any; }; }) => {
+        const newRole = event.target.value;
+        setSelectedRole(newRole);
+        localStorage.setItem('userRole', newRole);
+    };
+
   return (
     <Container
       style={{
@@ -63,10 +79,33 @@ export const Login: React.FC = () => {
           <img src={logo} alt="PropertyBoard Logo" />
           <img src={PropertyBoard} alt="PropertyBoard Logo" />
         </div>
+
+        <Typography variant="h6" gutterBottom>
+            Select Role
+          </Typography>
+
+          <FormControl fullWidth variant="outlined">
+            <InputLabel id="role-select-label">Role</InputLabel>
+            <Select
+              labelId="role-select-label"
+              id="role-select"
+              value={selectedRole}
+              onChange={handleChange}
+              label="Role"
+            >
+              <MenuItem value={'customer'}>
+                Customer
+              </MenuItem>
+              <MenuItem value={'agent'}>
+                Agent
+              </MenuItem>
+            </Select>
+          </FormControl>
+
         <GoogleButton />
 
         <Typography align="center" color={"text.secondary"} fontSize="12px">
-          Contact US ❤ 
+          Contact Us ❤
         </Typography>
       </Box>
     </Container>

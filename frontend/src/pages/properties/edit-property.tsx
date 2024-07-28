@@ -5,7 +5,7 @@ import { FieldValues } from "react-hook-form";
 
 import Form from "../../components/common/Form";
 
-const CreateProperty = () => {
+const EditProperty = () => {
   const authProvider = useActiveAuthProvider();
   const { data: user } = useGetIdentity({
     v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
@@ -54,4 +54,4 @@ const CreateProperty = () => {
     );
 };
 
-export default CreateProperty;
+export default EditProperty;

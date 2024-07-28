@@ -23,9 +23,19 @@ const lightTheme = createTheme({
   palette: {
     ...RefineThemes.Blue.palette,
     background: {
-      default: "#f0f0f0",
+      default: "#f4f4f4",
     },
   },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#fcfcfc',
+          color:'#000'
+        },
+      },
+    },
+  }
 });
 
 export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({

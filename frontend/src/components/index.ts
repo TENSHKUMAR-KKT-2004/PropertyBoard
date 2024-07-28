@@ -13,8 +13,8 @@ import TotalRevenue from "./charts/TotalRevenue";
 // agent
 import AgentCard from "./agent/AgentCard";
 
-// home
-import TopAgent from "./home/TopAgent";
+// profile
+import Form from './profile/Form'
 
 export {
     Profile,
@@ -24,5 +24,5 @@ export {
     PropertyReferrals,
     TotalRevenue,
     AgentCard,
-    TopAgent,
+    Form
 };

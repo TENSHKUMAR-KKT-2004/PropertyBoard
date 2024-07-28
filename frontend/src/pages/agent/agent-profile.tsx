@@ -11,7 +11,6 @@ const AgentProfile = () => {
         id
     });
 
-
     const myProfile = data?.data ?? [];
     
     if (isLoading) return <div>loading...</div>;
@@ -26,6 +25,14 @@ const AgentProfile = () => {
             email={myProfile.email}
             // @ts-ignore
             avatar={myProfile.avatar}
+            // @ts-ignore
+            banner={myProfile.banner}
+            // @ts-ignore
+            role={myProfile.role}
+            // @ts-ignore
+            address={myProfile.address}
+            // @ts-ignore
+            phonenumber={myProfile.phonenumber}
             // @ts-ignore
             properties={myProfile.allProperties}
         />

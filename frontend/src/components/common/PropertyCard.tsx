@@ -11,6 +11,7 @@ const PropertyCard = ({
   location,
   price,
   photo,
+  isDarkMode
 }: PropertyCardProps) => {
   return (
     <Card
@@ -24,7 +25,7 @@ const PropertyCard = ({
         },
         cursor: "pointer",
         textDecoration:'none',
-              bgcolor:'#fcfcfc'
+        bgcolor : isDarkMode ? '#1A1D1F' : "#fcfcfc",
       }}
       elevation={0}
     >
@@ -51,7 +52,7 @@ const PropertyCard = ({
           direction={'column'}
           gap={1}
         >
-          <Typography fontSize={16} fontWeight={500} color="#11142d">
+          <Typography fontSize={16} fontWeight={500} color={isDarkMode ? '#fcfcfc' :'#11142D'}>
             {title}
           </Typography>
           <Stack direction={'row'} gap={0.5}
@@ -61,12 +62,12 @@ const PropertyCard = ({
             <Place
               sx={{
                 fontSize: 18,
-                color: "#11142d",
+                color:isDarkMode ? '#fcfcfc' :'#11142D',
                 marginTop: 0.5,
               }}
             />
 
-            <Typography fontSize={14} color="#808191">
+            <Typography fontSize={14} color={isDarkMode ? '#6F767E' :'#11142D'}>
               {location}
             </Typography>
           </Stack>
@@ -75,7 +76,7 @@ const PropertyCard = ({
         px={1.5}
         py={0.5}
         borderRadius={1}
-        bgcolor="#dadefa"
+        bgcolor={isDarkMode? '#111315': "#dadefa"}
         height="fit-content"
         >
           <Typography fontSize={12} fontWeight={600} color="#475be8">₹{price}</Typography>

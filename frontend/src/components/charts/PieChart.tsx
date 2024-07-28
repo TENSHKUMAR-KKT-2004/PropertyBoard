@@ -5,13 +5,14 @@ import Stack from "@mui/material/Stack";
 
 import { PieChartProps } from "../../interfaces/home";
 
-const PieChart = ({ title, value, series, colors }: PieChartProps) => {
+const PieChart = ({ title, value, series, colors, isDarkMode }: PieChartProps) => {
+
     return (
         <Box
             id="chart"
             flex={1}
             display="flex"
-            bgcolor="#fcfcfc"
+            bgcolor={isDarkMode ? '#1A1D1F' : "#fcfcfc"}
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
@@ -23,12 +24,12 @@ const PieChart = ({ title, value, series, colors }: PieChartProps) => {
             width="fit-content"
         >
             <Stack direction="column">
-                <Typography fontSize={14} color="#808191">
+                <Typography color={isDarkMode ? '#66687B' : "#808191"} fontSize={14}>
                     {title}
                 </Typography>
                 <Typography
                     fontSize={24}
-                    color="#11142d"
+                    color={isDarkMode ? '#EFEFEF' : "#11142d"}
                     fontWeight={700}
                     mt={1}
                 >
@@ -38,10 +39,18 @@ const PieChart = ({ title, value, series, colors }: PieChartProps) => {
 
             <ReactApexChart
                 options={{
-                    chart: { type: "donut" },
+                    chart: { type: "donut",background: 'transparent' },
                     colors,
                     legend: { show: false },
                     dataLabels: { enabled: false },
+
+                    fill: {
+                        type: 'solid',
+                        opacity: 1,
+                    },
+                    stroke: {
+                        show: false,
+                    },
                 }}
                 series={series}
                 type="donut"

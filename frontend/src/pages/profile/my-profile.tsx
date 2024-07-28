@@ -1,6 +1,6 @@
 import { useActiveAuthProvider, useGetIdentity, useOne } from "@refinedev/core";
 
-import { Profile } from "../components";
+import { Profile } from "../../components";
 
 const MyProfile = () => {
   const authProvider = useActiveAuthProvider();
@@ -26,6 +26,14 @@ const MyProfile = () => {
             email={myProfile.email}
             // @ts-ignore
             avatar={myProfile.avatar}
+            // @ts-ignore
+            banner={myProfile.banner}
+            // @ts-ignore
+            role={myProfile.role}
+            // @ts-ignore
+            address={myProfile.address}
+            // @ts-ignore
+            phonenumber={myProfile.phonenumber}
             // @ts-ignore
             properties={myProfile.allProperties}
         />
