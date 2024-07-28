@@ -4,12 +4,17 @@ import { useForm } from '@refinedev/react-hook-form'
 import { FieldValues } from "react-hook-form"
 
 import Form from '../../components/common/Form'
+import { useTheme } from '@mui/material'
 
 const CreateProperty = () => {
   const authProvider = useActiveAuthProvider();
   const { data: user } = useGetIdentity({
     v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
   })
+
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
+  
   const [propertyImage, setPropertyImage] = useState({ name: "", url: "" })
   const { refineCore: { onFinish, formLoading }, register, handleSubmit } = useForm()
 
@@ -45,6 +50,7 @@ const CreateProperty = () => {
       handleImageChange={handleImageChange}
       onFinishHandler={onFinishHandler}
       propertyImage={propertyImage}
+      isDarkMode={isDarkMode}
     />
   )
 }

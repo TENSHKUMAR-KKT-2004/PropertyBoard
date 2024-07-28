@@ -4,12 +4,13 @@ import { useForm } from "@refinedev/react-hook-form";
 import { FieldValues } from "react-hook-form";
 
 import Form from "../../components/common/Form";
+import { useTheme } from "@mui/material";
 
 const EditProperty = () => {
-  const authProvider = useActiveAuthProvider();
-  const { data: user } = useGetIdentity({
-    v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
-  })
+    const authProvider = useActiveAuthProvider();
+    const { data: user } = useGetIdentity({
+        v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
+    })
     const [propertyImage, setPropertyImage] = useState({ name: "", url: "" });
     const {
         refineCore: { onFinish, formLoading },
@@ -17,6 +18,8 @@ const EditProperty = () => {
         handleSubmit,
     } = useForm();
 
+    const theme = useTheme();
+    const isDarkMode = theme.palette.mode === 'dark';
     const handleImageChange = (file: File) => {
         const reader = (readFile: File) =>
             new Promise<string>((resolve, reject) => {
@@ -50,6 +53,7 @@ const EditProperty = () => {
             handleImageChange={handleImageChange}
             onFinishHandler={onFinishHandler}
             propertyImage={propertyImage}
+            isDarkMode={isDarkMode}
         />
     );
 };

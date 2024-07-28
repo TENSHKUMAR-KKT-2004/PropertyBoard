@@ -4,17 +4,17 @@ import { Box, Typography, FormControl, FormHelperText, TextField, TextareaAutosi
 import { FormProps } from '../../interfaces/common';
 import CustomButton from './CustomButton';
 
-const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImageChange, onFinishHandler, propertyImage }: FormProps) => {
+const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImageChange, onFinishHandler, propertyImage,isDarkMode }: FormProps) => {
   return (
     <Box>
       <Typography
-        fontSize={25} fontWeight={700} color={'#11142d'}
+        fontSize={25} fontWeight={700} color={isDarkMode ? '#EFEFEF' : '#11142d'}
       >
         {type} a Property
       </Typography>
 
       <Box
-        mt={2.5} borderRadius={'15px'} padding={'20px'} bgcolor={'#fcfcfc'}
+        mt={2.5} borderRadius={'15px'} padding={'20px'} bgcolor={ isDarkMode ? '#1A1D1F' : '#fcfcfc'}
       >
         <form style={{
           marginTop: "20px", width: '100%', display: 'flex', flexDirection: 'column',
@@ -24,7 +24,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImage
         >
           <FormControl>
             <FormHelperText sx={{
-              fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+              fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
             }}>
               Enter Property Name</FormHelperText>
             <TextField
@@ -39,7 +39,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImage
 
           <FormControl>
             <FormHelperText sx={{
-              fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+              fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
             }}>
               Enter Property Description</FormHelperText>
             <TextareaAutosize
@@ -73,7 +73,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImage
                   fontWeight: 500,
                   margin: '10px 0',
                   fontSize: 16,
-                  color: '#11142d'
+                  color: isDarkMode ? '#EFEFEF' : '#11142d'
                 }}
               >
                 Select Property Type
@@ -143,7 +143,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImage
 
             <FormControl>
                 <FormHelperText sx={{
-                  fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+                  fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
                 }}>
                   Enter Property Price (in INR ₹)</FormHelperText>
                 <TextField
@@ -160,7 +160,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImage
 
           <FormControl>
             <FormHelperText sx={{
-              fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+              fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
             }}>
               Enter Location</FormHelperText>
             <TextField
@@ -180,7 +180,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleImage
             direction={'row'} gap={2} 
             >
               <Typography
-              color={'#11142d'}
+              color={isDarkMode ? '#EFEFEF' : '#11142d'}
               fontSize={16}
               fontWeight={500}
               my={'10px'}

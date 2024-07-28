@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { useActiveAuthProvider, useDelete, useGetIdentity, useShow } from "@refinedev/core";
 import { useParams, useNavigate } from "react-router-dom";
 import { ChatBubble, Delete, Edit, Phone, Place, Star } from "@mui/icons-material"
@@ -18,6 +18,9 @@ const PropertyDetails = () => {
     v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
   });
 
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
+  
   const { id } = useParams();
 
   const { queryResult } = useShow({
@@ -63,10 +66,10 @@ const PropertyDetails = () => {
     <Box
             borderRadius={"15px"}
             padding={'20px'}
-            bgcolor={"#FCFCFC"}
+            bgcolor={isDarkMode ? '#1A1D1F' : '#FCFCFC'}
             width={"fit-content"}
         >
-            <Typography fontSize={25} fontWeight={700} color={"#11142D"}>
+            <Typography fontSize={25} fontWeight={700} color={isDarkMode ? '#EFEFEF' : '#11142d'}>
                 Details
             </Typography>
 
@@ -95,7 +98,7 @@ const PropertyDetails = () => {
                             <Typography
                                 fontSize={18}
                                 fontWeight={500}
-                                color="#11142D"
+                                color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                 textTransform="capitalize"
                             >
                                 {propertyDetails.propertyType}
@@ -122,7 +125,7 @@ const PropertyDetails = () => {
                                     fontSize={22}
                                     fontWeight={600}
                                     mt="10px"
-                                    color="#11142D"
+                                    color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                 >
                                     {propertyDetails.title}
                                 </Typography>
@@ -132,8 +135,8 @@ const PropertyDetails = () => {
                                     alignItems="center"
                                     gap={0.5}
                                 >
-                                    <Place sx={{ color: "#808191" }} />
-                                    <Typography fontSize={14} color="#808191">
+                                    <Place sx={{ color: isDarkMode ? '#6F767E' : '#808191' }} />
+                                    <Typography fontSize={14} color={isDarkMode ? '#6F767E' : '#808191'}>
                                         {propertyDetails.location}
                                     </Typography>
                                 </Stack>
@@ -144,7 +147,7 @@ const PropertyDetails = () => {
                                     fontSize={16}
                                     fontWeight={600}
                                     mt="10px"
-                                    color="#11142D"
+                                    color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                 >
                                     Price
                                 </Typography>
@@ -162,7 +165,7 @@ const PropertyDetails = () => {
                                     </Typography>
                                     <Typography
                                         fontSize={14}
-                                        color="#808191"
+                                        color={isDarkMode ? '#6F767E' : '#808191'}
                                         mb={0.5}
                                     >
                                         only
@@ -172,10 +175,10 @@ const PropertyDetails = () => {
                         </Stack>
 
                         <Stack mt="25px" direction="column" gap="10px">
-                            <Typography fontSize={18} color="#11142D">
+                            <Typography fontSize={18} color={isDarkMode ? '#EFEFEF' : '#11142d'}>
                                 Description
                             </Typography>
-                            <Typography fontSize={14} color="#808191">
+                            <Typography fontSize={14}  color={isDarkMode ? '#6F767E' : '#808191'}>
                                 {propertyDetails.description}
                             </Typography>
                         </Stack>
@@ -196,7 +199,7 @@ const PropertyDetails = () => {
                         direction="column"
                         justifyContent="center"
                         alignItems="center"
-                        border="1px solid #E4E4E4"
+                        border={isDarkMode ? "1px solid #E4E4E4" : "1px solid #6F767E"}
                         borderRadius={2}
                     >
                         <Stack
@@ -224,7 +227,7 @@ const PropertyDetails = () => {
                                 <Typography
                                     fontSize={18}
                                     fontWeight={600}
-                                    color="#11142D"
+                                    color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                 >
                                     {propertyDetails.creator.name}
                                 </Typography>
@@ -232,7 +235,7 @@ const PropertyDetails = () => {
                                     mt="5px"
                                     fontSize={14}
                                     fontWeight={400}
-                                    color="#808191"
+                                    color={isDarkMode ? '#6F767E' : '#808191'}
                                 >
                                     Agent
                                 </Typography>
@@ -244,11 +247,11 @@ const PropertyDetails = () => {
                                 alignItems="center"
                                 gap={1}
                             >
-                                <Place sx={{ color: "#808191" }} />
+                                <Place sx={{ color: isDarkMode ? '#6F767E' : '#808191' }} />
                                 <Typography
                                     fontSize={14}
                                     fontWeight={400}
-                                    color="#808191"
+                                    color={isDarkMode ? '#6F767E' : '#808191'}
                                 >
                                     {propertyDetails.creator.address}
                                 </Typography>
@@ -258,7 +261,7 @@ const PropertyDetails = () => {
                                 mt={1}
                                 fontSize={16}
                                 fontWeight={600}
-                                color="#11142D"
+                                color={isDarkMode ? '#EFEFEF' : '#11142d'}
                             >
                                 {propertyDetails.creator.allProperties.length}{" "}
                                 Properties

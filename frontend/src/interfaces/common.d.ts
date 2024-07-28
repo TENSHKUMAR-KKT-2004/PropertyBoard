@@ -44,6 +44,7 @@ export interface FormProps {
     handleImageChange: (file) => void;
     onFinishHandler: (data: FieldValues) => Promise<void> | void;
     propertyImage: { name: string; url: string };
+    isDarkMode:boolean
 }
 
 export interface ProfileEditFormProps {
