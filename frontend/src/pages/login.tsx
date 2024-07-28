@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import { CredentialResponse } from "../interfaces/google"
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+// import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 export const Login: React.FC = () => {
   const { mutate: login } = useLogin<CredentialResponse>();
@@ -45,20 +45,20 @@ export const Login: React.FC = () => {
     return <div ref={divRef} />;
   };
 
-  const [selectedRole, setSelectedRole] = useState('');
+  // const [selectedRole, setSelectedRole] = useState('');
 
-    useEffect(() => {
-        const storedRole = localStorage.getItem('userRole');
-        if (storedRole) {
-            setSelectedRole(storedRole);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedRole = localStorage.getItem('userRole');
+    //     if (storedRole) {
+    //         setSelectedRole(storedRole);
+    //     }
+    // }, []);
 
-    const handleChange = (event: { target: { value: any; }; }) => {
-        const newRole = event.target.value;
-        setSelectedRole(newRole);
-        localStorage.setItem('userRole', newRole);
-    };
+    // const handleChange = (event: { target: { value: any; }; }) => {
+    //     const newRole = event.target.value;
+    //     setSelectedRole(newRole);
+    //     localStorage.setItem('userRole', newRole);
+    // };
 
   return (
     <Container
@@ -80,7 +80,7 @@ export const Login: React.FC = () => {
           <img src={PropertyBoard} alt="PropertyBoard Logo" />
         </div>
 
-        <Typography variant="h6" gutterBottom>
+        {/* <Typography variant="h6" gutterBottom>
             Select Role
           </Typography>
 
@@ -100,12 +100,12 @@ export const Login: React.FC = () => {
                 Agent
               </MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
 
         <GoogleButton />
 
         <Typography align="center" color={"text.secondary"} fontSize="12px">
-          Contact Us ❤
+        &copy; PropertyBoard
         </Typography>
       </Box>
     </Container>

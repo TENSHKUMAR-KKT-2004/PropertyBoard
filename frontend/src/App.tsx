@@ -2,6 +2,7 @@ import {
   AuthBindings,
   Authenticated,
   Refine,
+  useTitle,
 } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -54,6 +55,7 @@ import { ReactComponent as PropertyBoard } from './assets/PropertyBoard.svg'
 import { ThemedLayoutV2 } from "./components/layout/index";
 import { ThemedSiderV2 } from "./components/layout/sider";
 import { ThemedTitleV2 } from "./components/layout/title";
+import { useEffect } from "react";
 
 
 const axiosInstance = axios.create();
@@ -66,13 +68,30 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
+interface TitleHandlerProps {
+  resource?: object;
+  action?: object;
+  params?: object;
+}
+
+const customTitleHandler = ({ resource, action }: TitleHandlerProps) => {
+  let title = "PropertyBoard"
+  
+  if (resource && action) {
+    // @ts-ignore
+    title = `${resource.label} | ${"PropertyBoard"}`;
+  }
+
+  return title;
+};
+
 function App() {
   const authProvider: AuthBindings = {
     login: async ({ credential }: CredentialResponse) => {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
-        const storedRole = localStorage.getItem('userRole');
+        // const storedRole = localStorage.getItem('userRole');
         const response = await fetch(
           "http://localhost:8080/api/users",
           {
@@ -82,7 +101,7 @@ function App() {
               name: profileObj.name,
               email: profileObj.email,
               avatar: profileObj.picture,
-              role: storedRole
+              // role: storedRole
             }),
           },
         );
@@ -159,7 +178,7 @@ function App() {
       return null;
     },
   };
-
+  
   return (
     <BrowserRouter>
       <RefineKbarProvider>
@@ -181,6 +200,7 @@ function App() {
                 },
                 {
                   name: "properties",
+                  options: { label: "Properties" },
                   list: AllProperties,
                   show: PropertyDetails,
                   create: CreateProperty,
@@ -192,6 +212,7 @@ function App() {
                 },
                 {
                   name: "agents",
+                  options: { label: "Agents" },
                   list: Agents,
                   show: AgentProfile,
                   icon: <PeopleAltOutlined />,
@@ -199,25 +220,25 @@ function App() {
                     canDelete: true,
                   },
                 },
-                {
-                  name: "reviews",
-                  list: Home,
-                  icon: <StarOutlineRounded />,
-                  meta: {
-                    canDelete: true,
-                  },
-                },
-                {
-                  name: "messages",
-                  list: Home,
-                  icon: <ChatBubbleOutline />,
-                  meta: {
-                    canDelete: true,
-                  },
-                },
+                // {
+                //   name: "reviews",
+                //   list: Home,
+                //   icon: <StarOutlineRounded />,
+                //   meta: {
+                //     canDelete: true,
+                //   },
+                // },
+                // {
+                //   name: "messages",
+                //   list: Home,
+                //   icon: <ChatBubbleOutline />,
+                //   meta: {
+                //     canDelete: true,
+                //   },
+                // },
                 {
                   name: "my-profile",
-                  options: { label: "My Profile " },
+                  options: { label: "My Profile" },
                   list: MyProfile,
                   edit: EditProfile,
                   icon: <AccountCircleOutlined />,
@@ -229,7 +250,7 @@ function App() {
               options={{
                 title: {
                   icon: <Logo />,
-                  text: <PropertyBoard />,
+                  text: <PropertyBoard/>,
                 },
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
@@ -301,7 +322,10 @@ function App() {
 
               <RefineKbar />
               <UnsavedChangesNotifier />
-              <DocumentTitleHandler />
+              
+              <DocumentTitleHandler
+              // @ts-ignore
+              handler={customTitleHandler}/>
             </Refine>
           </RefineSnackbarProvider>
         </ColorModeContextProvider>

@@ -22,7 +22,9 @@ const getAllusers = async(req,res)=>{
 
 const createUser = async(req,res)=>{
     try {
-        const { name, email, avatar, role } = req.body
+        const { name, email, avatar, 
+            // role 
+        } = req.body
         
         const userExists = await User.findOne({ email }) 
 
@@ -34,7 +36,7 @@ const createUser = async(req,res)=>{
             name,
             email,
             avatar,
-            role
+            // role
         })
         
         res.status(200).json(newUser) 
