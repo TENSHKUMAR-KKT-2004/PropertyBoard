@@ -13,7 +13,7 @@ function checkImage(url: any) {
     return img.width !== 0 && img.height !== 0;
 }
 
-const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber,  properties }: ProfileProps) => {
+const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber,  properties, isDarkMode }: ProfileProps) => {
     const authProvider = useActiveAuthProvider();
   const { data: user } = useGetIdentity({
     v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
@@ -23,11 +23,11 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
   
     return (
         <Box>
-            <Typography fontSize={25} fontWeight={700} color="#11142D">
+            <Typography fontSize={25} fontWeight={700} color={isDarkMode ? '#EFEFEF' : '#11142d'}>
                 {type} Profile
             </Typography>
 
-            <Box mt="20px" borderRadius="15px" padding="20px" bgcolor="#FCFCFC">
+            <Box mt="20px" borderRadius="15px" padding="20px" bgcolor={isDarkMode ? "#1A1D1F":"#FCFCFC"} >
                 <Box
                     sx={{
                         display: "flex",
@@ -78,11 +78,11 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
                                     <Typography
                                         fontSize={22}
                                         fontWeight={600}
-                                        color="#11142D"
+                                        color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                     >
                                         {name}
                                     </Typography>
-                                    <Typography fontSize={16} color="#808191">
+                                    <Typography fontSize={16} color={isDarkMode ? '#6F767E' : '#808191'}>
                                         {role.toUpperCase()}
                                     </Typography>
                                 </Stack>
@@ -92,7 +92,7 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
                                         <Typography
                                             fontSize={14}
                                             fontWeight={500}
-                                            color="#808191"
+                                            color={isDarkMode ? '#6F767E' : '#808191'}
                                         >
                                             Address
                                         </Typography>
@@ -102,10 +102,10 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
                                             alignItems="center"
                                             gap="10px"
                                         >
-                                            <Place sx={{ color: "#11142D" }} />
+                                            <Place sx={{ color: isDarkMode ? '#EFEFEF' : "#11142D" }} />
                                             <Typography
                                                 fontSize={14}
-                                                color="#11142D"
+                                                color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                             >
                                                 {address}
                                             </Typography>
@@ -122,7 +122,7 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
                                             <Typography
                                                 fontSize={14}
                                                 fontWeight={500}
-                                                color="#808191"
+                                                color={isDarkMode ? '#6F767E' : '#808191'}
                                             >
                                                 Phone Number
                                             </Typography>
@@ -132,10 +132,10 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
                                                 alignItems="center"
                                                 gap="10px"
                                             >
-                                                <Phone sx={{ color: "#11142D" }} />
+                                                <Phone sx={{ color: isDarkMode ? '#EFEFEF' : "#11142D" }} />
                                                 <Typography
                                                     fontSize={14}
-                                                    color="#11142D"
+                                                    color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                                     noWrap
                                                 >
                                                     {phonenumber}
@@ -147,7 +147,7 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
                                             <Typography
                                                 fontSize={14}
                                                 fontWeight={500}
-                                                color="#808191"
+                                                color={isDarkMode ? '#6F767E' : '#808191'}
                                             >
                                                 Email
                                             </Typography>
@@ -157,10 +157,10 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
                                                 alignItems="center"
                                                 gap="10px"
                                             >
-                                                <Email sx={{ color: "#11142D" }} />
+                                                <Email sx={{ color: isDarkMode ? '#EFEFEF' : "#11142D" }} />
                                                 <Typography
                                                     fontSize={14}
-                                                    color="#11142D"
+                                                    color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                                 >
                                                     {email}
                                                 </Typography>
@@ -196,8 +196,8 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
             </Box>
 
             {properties.length > 0 && (
-                <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#FCFCFC">
-                    <Typography fontSize={18} fontWeight={600} color="#11142D">
+                <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor={isDarkMode ? "#1A1D1F":"#FCFCFC"}>
+                    <Typography fontSize={18} fontWeight={600}  color={isDarkMode ? '#EFEFEF' : '#11142d'}>
                         {type} Properties
                     </Typography>
 
@@ -217,6 +217,7 @@ const Profile = ({ type, name, avatar, email, banner, role, address, phonenumber
                                 location={property.location}
                                 price={property.price}
                                 photo={property.photo}
+                                isDarkMode={isDarkMode}
                             />
                         ))}
                     </Box>

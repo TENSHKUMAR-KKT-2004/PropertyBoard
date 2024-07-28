@@ -19,6 +19,7 @@ export interface ProfileProps {
     address: string;
     phonenumber: string;
     properties: Array | undefined;
+    isDarkMode: boolean
 }
 
 export interface PropertyProps {
@@ -62,4 +63,5 @@ export interface ProfileEditFormProps {
     onFinishHandler: (data: FieldValues) => Promise<void> | void;
     bannerImage: { name: string; url: string };
     avatarImage: { name: string; url: string };
+    isDarkMode: boolean
 }

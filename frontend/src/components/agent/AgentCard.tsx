@@ -11,7 +11,7 @@ function checkImage(url: any) {
     return img.width !== 0 && img.height !== 0;
 }
 
-const InfoBar = ({ icon, name }: InfoBarProps) => (
+const InfoBar = ({ icon, name, isDarkMode }: InfoBarProps) => (
     <Stack
         flex={1}
         minWidth={{ xs: "100%", sm: 300 }}
@@ -19,7 +19,7 @@ const InfoBar = ({ icon, name }: InfoBarProps) => (
         direction="row"
     >
         {icon}
-        <Typography fontSize={14} color="#808191">
+        <Typography fontSize={14} color={isDarkMode ? '#6F767E' : "#808191"}>
             {name}
         </Typography>
     </Stack>
@@ -33,6 +33,7 @@ const AgentCard = ({
     address,
     phonenumber,
     noOfProperties,
+    isDarkMode
 }: AgentCardProp) => {
   const authProvider = useActiveAuthProvider();
   const { data: currentUser } = useGetIdentity({
@@ -83,10 +84,10 @@ const AgentCard = ({
                     flexWrap="wrap"
                     alignItems="center"
                 >
-                    <Typography fontSize={22} fontWeight={600} color="#11142d">
+                    <Typography fontSize={22} fontWeight={600} color={isDarkMode ? '#EFEFEF' : '#11142d'}>
                         {name}
                     </Typography>
-                    <Typography fontSize={14} color="#808191">
+                    <Typography fontSize={14} color={isDarkMode ? '#6F767E' : '#808191'}>
                         Real-Estate Agent
                     </Typography>
                 </Stack>
@@ -98,19 +99,23 @@ const AgentCard = ({
                     gap={2}
                 >
                     <InfoBar
-                        icon={<EmailOutlined sx={{ color: "#808191" }} />}
+                        icon={<EmailOutlined sx={{ color: isDarkMode ? '#6F767E' : "#808191" }} />}
                         name={email}
+                        isDarkMode={isDarkMode}
                     />
                     <InfoBar
-                        icon={<Place sx={{ color: "#808191" }} />}
+                        icon={<Place sx={{ color: isDarkMode ? '#6F767E' : "#808191" }} />}
+                        isDarkMode={isDarkMode}
                         name={address}
                     />
                     <InfoBar
-                        icon={<Phone sx={{ color: "#808191" }} />}
+                        icon={<Phone sx={{ color: isDarkMode ? '#6F767E' : "#808191" }} />}
+                        isDarkMode={isDarkMode}
                         name={phonenumber}
                     />
                     <InfoBar
-                        icon={<LocationCity sx={{ color: "#808191" }} />}
+                        icon={<LocationCity sx={{ color: isDarkMode ? '#6F767E' : "#808191" }} />}
+                        isDarkMode={isDarkMode}
                         name={`${noOfProperties} Properties`}
                     />
                 </Stack>

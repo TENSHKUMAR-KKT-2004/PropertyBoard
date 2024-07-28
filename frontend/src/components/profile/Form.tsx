@@ -4,17 +4,17 @@ import CustomButton from '../common/CustomButton'
 
 import { ProfileEditFormProps } from '../../interfaces/common'
 
-const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBannerImageChange, handleAvatarImageChange, onFinishHandler, bannerImage, avatarImage }: ProfileEditFormProps) => {
+const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBannerImageChange, handleAvatarImageChange, onFinishHandler, bannerImage, avatarImage, isDarkMode }: ProfileEditFormProps) => {
     return (
         <Box>
             <Typography
-                fontSize={25} fontWeight={700} color={'#11142d'}
+                fontSize={25} fontWeight={700}  color={isDarkMode ? '#EFEFEF' : '#11142d'}
             >
                 {type} Profile
             </Typography>
 
             <Box
-                mt={2.5} borderRadius={'15px'} padding={'20px'} bgcolor={'#fcfcfc'}
+                mt={2.5} borderRadius={'15px'} padding={'20px'} bgcolor={isDarkMode ? "#1A1D1F":"#FCFCFC"}
             >
                 <form style={{
                     marginTop: "20px", width: '100%', display: 'flex', flexDirection: 'column',
@@ -24,7 +24,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBanne
                 >
                     <FormControl>
                         <FormHelperText sx={{
-                            fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+                            fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
                         }}>
                             Edit Name</FormHelperText>
                         <TextField
@@ -44,7 +44,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBanne
                             }}
                         >
                             <FormHelperText sx={{
-                                fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+                                fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
                             }}>
                                 Email</FormHelperText>
                             <TextField
@@ -59,7 +59,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBanne
 
                         <FormControl>
                             <FormHelperText sx={{
-                                fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+                                fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
                             }}>
                                 Role</FormHelperText>
                             <TextField
@@ -75,7 +75,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBanne
 
                     <FormControl>
                         <FormHelperText sx={{
-                            fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+                            fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
                         }}>
                             Edit Address</FormHelperText>
                         <TextareaAutosize
@@ -100,7 +100,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBanne
 
                     <FormControl>
                         <FormHelperText sx={{
-                            fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: '#11142d'
+                            fontSize: '16px', margin: '10px 0px', fontWeight: 500, color: isDarkMode ? '#EFEFEF' : '#11142d'
                         }}>
                             Edit Contact Number</FormHelperText>
                         <TextField
@@ -121,7 +121,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBanne
                                 direction={'row'} gap={2}
                             >
                                 <Typography
-                                    color={'#11142d'}
+                                    color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                     fontSize={16}
                                     fontWeight={500}
                                     my={'10px'}
@@ -168,7 +168,7 @@ const Form = ({ type, register, onFinish, formLoading, handleSubmit, handleBanne
                                 direction={'row'} gap={2}
                             >
                                 <Typography
-                                    color={'#11142d'}
+                                    color={isDarkMode ? '#EFEFEF' : '#11142d'}
                                     fontSize={16}
                                     fontWeight={500}
                                     my={'10px'}

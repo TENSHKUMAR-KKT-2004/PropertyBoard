@@ -1,11 +1,14 @@
 import { useList } from "@refinedev/core";
-import {Box, Typography} from "@mui/material";
+import {Box, Typography, useTheme} from "@mui/material";
 
 import { AgentCard } from "../../components/index";
 
 const Agents = () => {
     const { data, isLoading, isError } = useList({ resource: "users" });
 
+    const theme = useTheme();
+    const isDarkMode = theme.palette.mode === 'dark';
+    
     const allAgents = data?.data ?? [];
 
     if (isLoading) return <div>loading...</div>;
@@ -13,7 +16,7 @@ const Agents = () => {
 
     return (
         <Box>
-            <Typography fontSize={25} fontWeight={700} color="#11142d">
+            <Typography fontSize={25} fontWeight={700} color={isDarkMode ? '#EFEFEF' : '#11142d'}>
                 Agents List
             </Typography>
 
@@ -23,7 +26,7 @@ const Agents = () => {
                     display: "flex",
                     flexWrap: "wrap",
                     gap: "20px",
-                    backgroundColor: "#fcfcfc",
+                    backgroundColor: isDarkMode? "#1A1D1F" : "#fcfcfc",
                 }}
             >
                 {allAgents.map((agent) => (
@@ -37,6 +40,7 @@ const Agents = () => {
                         address={agent.address}
                         phonenumber={agent.phonenumber}
                         noOfProperties={agent.allProperties.length}
+                        isDarkMode={isDarkMode}
                     /> : ''
                 ))}
             </Box>

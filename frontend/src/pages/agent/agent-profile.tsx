@@ -2,6 +2,7 @@ import { useOne } from "@refinedev/core";
 import { useParams } from "react-router-dom";
 
 import { Profile } from "../../components/index"
+import { useTheme } from "@mui/material";
 
 const AgentProfile = () => {
     const { id } = useParams();
@@ -10,6 +11,9 @@ const AgentProfile = () => {
         resource: "users",
         id
     });
+
+    const theme = useTheme();
+    const isDarkMode = theme.palette.mode === 'dark';
 
     const myProfile = data?.data ?? [];
     
@@ -35,6 +39,7 @@ const AgentProfile = () => {
             phonenumber={myProfile.phonenumber}
             // @ts-ignore
             properties={myProfile.allProperties}
+            isDarkMode={isDarkMode}
         />
     );
 };

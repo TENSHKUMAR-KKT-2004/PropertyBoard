@@ -8,9 +8,11 @@ export interface AgentCardProp {
     address: string;
     phonenumber: string;
     noOfProperties: number;
+    isDarkMode:boolean
 }
 
 export interface InfoBarProps {
     icon: ReactNode;
     name: string;
+    isDarkMode:boolean
 }

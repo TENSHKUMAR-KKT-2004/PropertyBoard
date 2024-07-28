@@ -3,6 +3,7 @@ import Form from '../../components/profile/Form'
 import { useForm } from '@refinedev/react-hook-form'
 import { useActiveAuthProvider, useGetIdentity, useOne } from '@refinedev/core';
 import { FieldValues } from "react-hook-form"
+import { useTheme } from '@mui/material';
 
 const EditProfile = () => {
   const authProvider = useActiveAuthProvider();
@@ -15,6 +16,9 @@ const EditProfile = () => {
     id: user.userid
   });
 
+  const theme = useTheme();
+    const isDarkMode = theme.palette.mode === 'dark';
+
   const myProfile = data?.data ?? [];
 
   const [bannerImage, setBannerImage] = useState({ name: "", url: "" })
@@ -25,6 +29,7 @@ const EditProfile = () => {
       refineCoreProps: {
       resource: "users",
       action: "edit",
+      // @ts-ignore
       id: myProfile._id,
     }
     }
@@ -82,6 +87,7 @@ const EditProfile = () => {
       onFinishHandler={onFinishHandler}
       bannerImage={bannerImage}
       avatarImage={avatarImage}
+      isDarkMode={isDarkMode}
     />
   )
 }
