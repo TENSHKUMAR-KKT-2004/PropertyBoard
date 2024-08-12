@@ -93,7 +93,7 @@ function App() {
       if (profileObj) {
         // const storedRole = localStorage.getItem('userRole');
         const response = await fetch(
-          "http://localhost:8080/api/users",
+          "https://propertyboard-server.onrender.com/api/users",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -187,7 +187,7 @@ function App() {
           <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
           <RefineSnackbarProvider>
             <Refine
-              dataProvider={dataProvider("http://localhost:8080/api")}
+              dataProvider={dataProvider("https://propertyboard-server.onrender.com/api")}
               notificationProvider={notificationProvider}
               routerProvider={routerBindings}
               authProvider={authProvider}
