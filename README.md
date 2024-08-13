@@ -68,7 +68,7 @@ PropertyBoard is a full-stack application developed using the MERN stack along w
     ***For the frontend:***
 
     ```bash
-    cd client
+    cd frontend
     npm install
     ```
 
